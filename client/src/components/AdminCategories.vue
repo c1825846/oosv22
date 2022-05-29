@@ -18,8 +18,8 @@
       </div>
     </div>
     <div class="categories__item" v-show="isFromOpened">
-      <input type="text" class="categories__input" ref="input">
-      <div class="categories__button">
+      <input type="text" class="categories__input" ref="input" v-model="newCategoryTitle" @keyup.enter="addCategory">
+      <div class="categories__button" @click="addCategory">
         <div class="icon">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -36,7 +36,7 @@ export default {
   data(){
     return {
       isFromOpened: false,
-
+      newCategoryTitle: '',
       categories: ['ДР-1', 'ДР-2', 'Шнеки', 'Транспортёры', 'Грануляторы'],
     }
   },
@@ -46,6 +46,10 @@ export default {
       this.$nextTick(() => {
         this.$refs.input.focus()
       })
+    },
+    addCategory() {
+      this.categories.push(this.newCategoryTitle)
+      this.isFromOpened = false
     }
   }
 }
