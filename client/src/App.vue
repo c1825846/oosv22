@@ -19,6 +19,10 @@ export default {
     Header,
     Footer,
     MainMenu,
+  },
+  created() {
+    this.$store.dispatch('fetchItems')
+    this.$store.dispatch('fetchCategories')
   }
 }
 </script>

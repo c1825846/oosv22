@@ -4,10 +4,11 @@
       <div class="catalog__body">
         <AsideMenu
             :link-list="categories"
+            @select="selectCategory($event)"
         />
         <div class="catalog__grid">
           <Card
-              v-for="item in items"
+              v-for="item in filteredItems"
               :key="item.title"
               :item="item"
           />
@@ -29,13 +30,25 @@ export default {
   },
   data() {
     return {
-      categories: ['ДР-1', 'ДР-2', 'Шнеки', 'Транспортёры', 'Грануляторы'],
-      items: [
-        {title: 'Дробилка', price: '30000', imagePath: ''},
-        {title: 'Транспортёр', price: '15000', imagePath: ''},
-        {title: 'Часть дробилки', price: '7000', imagePath: ''},
-        {title: 'Бункер', price: '6000', imagePath: ''},
-      ]
+      selectedCategory: '',
+    }
+  },
+  computed: {
+    categories() {
+      return this.$store.getters.categories
+    },
+    items() {
+      return this.$store.getters.items
+    },
+    filteredItems() {
+      if (this.selectedCategory !== '')
+        return this.items.filter(item => item.category._id === this.selectedCategory._id)
+      return this.items
+    }
+  },
+  methods: {
+    selectCategory(category) {
+      this.selectedCategory = category
     }
   }
 }
@@ -51,7 +64,7 @@ export default {
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     grid-gap: 10px;
   }
 }

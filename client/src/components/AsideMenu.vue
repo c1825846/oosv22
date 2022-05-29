@@ -1,8 +1,20 @@
 <template>
   <div class="menu">
     <div class="menu__list">
-      <div class="menu__link" v-for="link in linkList">
-        {{ link }}
+      <div
+          class="menu__link"
+          :class="{'menu__link--selected': selectedItem === ''}"
+          @click="clearIem"
+      >
+        Все категории
+      </div>
+      <div
+          class="menu__link"
+          :class="{'menu__link--selected': link === selectedItem}"
+          v-for="link in linkList"
+          @click="selectItem(link)"
+      >
+        {{ link.title }}
       </div>
     </div>
   </div>
@@ -16,26 +28,41 @@ export default {
   },
   data() {
     return {
-      selectedItem: null,
+      selectedItem: '',
     }
   },
-  methods: {}
+  methods: {
+    selectItem(item) {
+      this.selectedItem = item
+      this.$emit('select', item)
+    },
+    clearIem() {
+      this.selectedItem = ''
+      this.$emit('select', '')
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.menu{
-  &__list{
+.menu {
+  &__list {
     display: grid;
     gap: 5px;
 
   }
+
   &__link {
     padding: 10px 20px;
     background: lightgray;
     cursor: pointer;
+
     &:hover {
       background: darken(lightgray, 10%);
+    }
+
+    &--selected {
+      background: darken(lightgray, 20%);
     }
   }
 }
