@@ -11,6 +11,7 @@
               v-for="item in filteredItems"
               :key="item.title"
               :item="item"
+              @add="addToCart($event)"
           />
         </div>
       </div>
@@ -49,6 +50,12 @@ export default {
   methods: {
     selectCategory(category) {
       this.selectedCategory = category
+    },
+    addToCart(item) {
+      this.$store.commit('addItemToCart', {
+        item,
+        quantity: 1,
+      })
     }
   }
 }
@@ -58,8 +65,10 @@ export default {
 .catalog {
   &__body {
     display: grid;
-    grid-template-columns: 300px 1fr;
     grid-column-gap: 10px;
+    @media (min-width: 768px) {
+      grid-template-columns: 300px 1fr;
+    }
   }
 
   &__grid {

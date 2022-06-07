@@ -15,8 +15,16 @@
         <div class="about__paragraph">
           <div class="about__title">Контакты</div>
           <div class="about__info">г.Барнаул, ул. Попоав, 220а</div>
-          <div class="about__info">8-961-988-88-98</div>
-          <div class="about__info">ooosv22@mail.ru</div>
+          <div class="about__info">
+            <a href="tel:89619888898">
+              8-961-988-88-98
+            </a>
+          </div>
+          <div class="about__info">
+            <a href="mailto:ooosv22@mail.ru">
+              ooosv22@mail.ru
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -28,6 +36,7 @@
       >
         <ymap-marker
             :coords="markerCoords"
+            marker-id="111"
         />
       </yandex-map>
     </div>

@@ -3,13 +3,16 @@ const Schema = mongoose.Schema
 
 const schema = new Schema({
     name: String,
-    emial: String,
+    email: String,
     phone: String,
     inn: String,
     comment: String,
     cart: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Item'
+        item: {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        },
+        quantity: Number
     }]
 })
 

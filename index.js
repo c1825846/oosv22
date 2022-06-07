@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('node:path')
 const fileUpload = require('express-fileupload')
+const cookieParser = require('cookie-parser')
 
 const apiRouter = require('./routes/api')
 
@@ -17,6 +18,7 @@ const app = express()
 
 app.use('/uploads', express.static('uploads'))
 app.use(fileUpload({}))
+app.use(cookieParser())
 app.use(express.json({ extended: true }))
 app.use('/api', apiRouter)
 

@@ -15,7 +15,7 @@
           <div class="detail__price">
             {{ item.price }} р.
           </div>
-          <div class="detail__button">
+          <div class="detail__button" @click="addToCart">
             В корзину
           </div>
           <div class="detail__description">
@@ -41,6 +41,18 @@ export default {
       isLoading: false
     }
   },
+  methods: {
+    addToCart() {
+      this.$store.commit('addItemToCart', {
+        item: {
+          title: this.item.title,
+          price: this.item.price,
+          _id: this.item._id,
+        },
+        quantity: 1,
+      })
+    }
+  },
   created() {
     this.isLoading = true
     fetch(`/api/item/${this.$route.params.id}`).then(response => response.json()).then(data => {
@@ -54,14 +66,18 @@ export default {
 <style lang="scss" scoped>
 .detail {
   padding-top: 40px;
+
   &__body {
+    @media (min-width: 1024px) {
+      grid-template-columns: 500px 1fr;
+    }
     display: grid;
-    grid-template-columns: 500px 1fr;
     gap: 20px;
   }
 
   &__image {
     height: 400px;
+
     img {
       width: 100%;
       height: 100%;
@@ -84,10 +100,12 @@ export default {
     cursor: pointer;
     background: lightgray;
     margin-bottom: 30px;
+
     &:hover {
       background: darken(lightgray, 10%);
     }
   }
+
   &__description {
     font-size: 18px;
     line-height: 1.5;

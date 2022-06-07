@@ -43,6 +43,10 @@ a {
   color: inherit;
 }
 
+input, textarea {
+  font-family: inherit;
+}
+
 .app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   height: 100%;
@@ -51,6 +55,7 @@ a {
 }
 
 .main {
+  padding-bottom: 10px;
 }
 
 .main-menu {

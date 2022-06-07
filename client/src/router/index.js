@@ -23,7 +23,37 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('@/views/Admin')
+    component: () => import('@/views/Admin'),
+    children: [
+      {
+        path: 'categories',
+        component: () => import('@/views/AdminCategories'),
+      },
+      {
+        path: 'orders',
+        component: () => import('@/views/AdminOrders'),
+      },
+      {
+        path: 'calls',
+        component: () => import('@/views/AdminCalls'),
+      },
+      {
+        path: 'items',
+        component: () => import('@/views/AdminItems'),
+      },
+      {
+        path: 'detail/:id?',
+        component: () => import('@/views/AdminItemDetail'),
+      },
+      {
+        path: 'login',
+        component: () => import('@/views/AdminLogin'),
+      },
+    ]
+  },
+  {
+    path: '/orderCall',
+    component: () => import('@/views/OrderCall')
   },
 ]
 
